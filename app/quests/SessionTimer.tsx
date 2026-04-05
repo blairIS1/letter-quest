@@ -2,7 +2,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { stopMusic } from "./music";
 
-const SESSION_MINUTES = 12;
+const SESSION_MINUTES = 20;
 
 export function useSessionTimer() {
   const [expired, setExpired] = useState(false);
