@@ -55,6 +55,33 @@ export default function Home() {
           </>
         ) : (
           <>
+            {completions > 0 && (
+              <div className="flex flex-col items-center gap-2 fade-in">
+                <p className="text-sm opacity-60">🏆 Completed {completions} time{completions > 1 ? "s" : ""} — pick your color!</p>
+                <div className="flex gap-2 flex-wrap justify-center">
+                  {BOOK_COLORS.map((c) => {
+                    const unlocked = completions >= c.unlockAt;
+                    return (
+                      <button key={c.name} title={unlocked ? c.name : `Complete ${c.unlockAt}x to unlock`}
+                        className="rounded-full border-2 transition-transform"
+                        style={{
+                          width: 36, height: 36,
+                          background: c.color === "url(#rainbow)" ? "linear-gradient(90deg,#f87171,#fbbf24,#4ade80,#38bdf8,#a78bfa)" : c.color,
+                          borderColor: bookColor === c.color ? "white" : "transparent",
+                          opacity: unlocked ? 1 : 0.3,
+                          cursor: unlocked ? "pointer" : "not-allowed",
+                          transform: bookColor === c.color ? "scale(1.2)" : "scale(1)",
+                        }}
+                        onClick={() => { if (unlocked) { sfxTap(); setBookColor(c.color); setSelectedColor(c.color); } }}
+                      >
+                        {!unlocked && <span className="text-xs">🔒</span>}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
             <div className="flex gap-3">
               {badges.map((b, i) => (
                 <span key={i} className="text-3xl" style={{ opacity: completed[i] ? 1 : 0.3, filter: completed[i] ? "none" : "grayscale(1)" }}>{b}</span>
@@ -77,33 +104,6 @@ export default function Home() {
             {completed.every(Boolean) && (
               <div className="text-xl font-bold text-center fade-in" style={{ color: "var(--success)" }}>
                 🎉 All quests complete! You&apos;re a letter master!
-              </div>
-            )}
-
-            {completions > 0 && (
-              <div className="flex flex-col items-center gap-2 fade-in">
-                <p className="text-sm opacity-60">🏆 Completed {completions} time{completions > 1 ? "s" : ""} — pick your book color!</p>
-                <div className="flex gap-2 flex-wrap justify-center">
-                  {BOOK_COLORS.map((c) => {
-                    const unlocked = completions >= c.unlockAt;
-                    return (
-                      <button key={c.name} title={unlocked ? c.name : `Complete ${c.unlockAt}x to unlock`}
-                        className="rounded-full border-2 transition-transform"
-                        style={{
-                          width: 36, height: 36,
-                          background: c.color === "url(#rainbow)" ? "linear-gradient(90deg,#f87171,#fbbf24,#4ade80,#38bdf8,#a78bfa)" : c.color,
-                          borderColor: bookColor === c.color ? "white" : "transparent",
-                          opacity: unlocked ? 1 : 0.3,
-                          cursor: unlocked ? "pointer" : "not-allowed",
-                          transform: bookColor === c.color ? "scale(1.2)" : "scale(1)",
-                        }}
-                        onClick={() => { if (unlocked) { sfxTap(); setBookColor(c.color); setSelectedColor(c.color); } }}
-                      >
-                        {!unlocked && <span className="text-xs">🔒</span>}
-                      </button>
-                    );
-                  })}
-                </div>
               </div>
             )}
           </>
