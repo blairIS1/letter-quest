@@ -59,10 +59,4 @@ export const VOICES = {
   "en-US-GuyNeural": "Guy (US, adult male, friendly)",
   "en-GB-MaisieNeural": "Maisie (UK, child)",
   "en-AU-AnnetteNeural": "Annette (AU, adult female)",
-  // Chinese
-  "zh-CN-XiaoxiaoNeural": "Xiaoxiao (CN, female, warm)",
-  "zh-CN-XiaoyiNeural": "Xiaoyi (CN, female, child-like)",
-  "zh-CN-YunxiNeural": "Yunxi (CN, male, friendly)",
-  // Multilingual
-  "en-US-AvaMultilingualNeural": "Ava (US, multilingual)",
 } as const;
