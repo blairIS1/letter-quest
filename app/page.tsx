@@ -10,6 +10,7 @@ import SessionTimer, { useSessionTimer } from "./quests/SessionTimer";
 import { sfxTap, sfxCelebrate } from "./quests/sfx";
 import { speak, stopSpeaking } from "./quests/speak";
 import { TrainingData } from "./quests/data";
+import { recordCompletion, getCompletions, BOOK_COLORS, getSelectedColor, setSelectedColor } from "./quests/scores";
 
 const QUESTS = ["🔤 Match Letters", "🔊 Letter Sounds", "✏️ Spell Words", "⚡ Speed Round"];
 
@@ -19,8 +20,12 @@ export default function Home() {
   const [phase, setPhase] = useState<Phase>("menu");
   const [completed, setCompleted] = useState([false, false, false, false]);
   const [training, setTraining] = useState<TrainingData>({});
+  const [completions, setCompletions] = useState(0);
+  const [bookColor, setBookColor] = useState("#38bdf8");
   const [started, setStarted] = useState(false);
   const { expired, dismiss } = useSessionTimer();
+
+  useEffect(() => { setCompletions(getCompletions()); setBookColor(getSelectedColor()); }, []);
 
   const markDone = (i: number) => setCompleted((p) => { const n = [...p]; n[i] = true; return n; });
 
@@ -34,7 +39,7 @@ export default function Home() {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen gap-6 p-8 fade-in">
         <Confetti active={completed.every(Boolean)} />
-        <BookBuddy mood={completed.every(Boolean) ? "celebrate" : "idle"} size={140} />
+        <BookBuddy mood={completed.every(Boolean) ? "celebrate" : "idle"} size={140} color={bookColor} />
         <h1 className="text-4xl font-bold text-center">📚 Letter Quest!</h1>
         <p className="text-lg text-center opacity-70 max-w-md">Learn your ABCs through 4 fun quests!</p>
 
@@ -74,6 +79,33 @@ export default function Home() {
                 🎉 All quests complete! You&apos;re a letter master!
               </div>
             )}
+
+            {completions > 0 && (
+              <div className="flex flex-col items-center gap-2 fade-in">
+                <p className="text-sm opacity-60">🏆 Completed {completions} time{completions > 1 ? "s" : ""} — pick your book color!</p>
+                <div className="flex gap-2 flex-wrap justify-center">
+                  {BOOK_COLORS.map((c) => {
+                    const unlocked = completions >= c.unlockAt;
+                    return (
+                      <button key={c.name} title={unlocked ? c.name : `Complete ${c.unlockAt}x to unlock`}
+                        className="rounded-full border-2 transition-transform"
+                        style={{
+                          width: 36, height: 36,
+                          background: c.color === "url(#rainbow)" ? "linear-gradient(90deg,#f87171,#fbbf24,#4ade80,#38bdf8,#a78bfa)" : c.color,
+                          borderColor: bookColor === c.color ? "white" : "transparent",
+                          opacity: unlocked ? 1 : 0.3,
+                          cursor: unlocked ? "pointer" : "not-allowed",
+                          transform: bookColor === c.color ? "scale(1.2)" : "scale(1)",
+                        }}
+                        onClick={() => { if (unlocked) { sfxTap(); setBookColor(c.color); setSelectedColor(c.color); } }}
+                      >
+                        {!unlocked && <span className="text-xs">🔒</span>}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </>
         )}
       </div>
@@ -85,7 +117,7 @@ export default function Home() {
       {phase === "q1" && <MatchLetters onComplete={() => { markDone(0); setPhase("q2"); }} />}
       {phase === "q2" && <LetterSounds onComplete={(data) => { setTraining(data); markDone(1); setPhase("q3"); }} />}
       {phase === "q3" && <SpellWords onComplete={() => { markDone(2); setPhase("q4"); }} />}
-      {phase === "q4" && <SpeedRound onComplete={() => { markDone(3); sfxCelebrate(); setPhase("menu"); speak("all_done.mp3"); }} />}
+      {phase === "q4" && <SpeedRound onComplete={() => { markDone(3); setCompletions(recordCompletion()); sfxCelebrate(); setPhase("menu"); speak("all_done.mp3"); }} />}
     </>
   );
 }
