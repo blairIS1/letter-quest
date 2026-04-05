@@ -20,12 +20,8 @@ export default function LetterSounds({ onComplete }: { onComplete: (data: Traini
 
   useEffect(() => { speak("q2_start.mp3"); return () => stopSpeaking(); }, []);
 
-  // Play the letter sound when a new letter appears
   useEffect(() => {
-    if (!done && !feedback) {
-      const key = `sound_${letters[idx].toLowerCase()}.mp3`;
-      speak(key);
-    }
+    if (!done && !feedback) speak(`sound_${letters[idx].toLowerCase()}.mp3`);
   }, [idx, done, feedback, letters]);
 
   if (done) {
@@ -69,20 +65,15 @@ export default function LetterSounds({ onComplete }: { onComplete: (data: Traini
       <BookBuddy mood={mood} size={80} />
       <p className="opacity-70 text-center">Listen and tap the right letter!</p>
       <ProgressBar value={idx + 1} total={letters.length} />
-
       <button className="btn btn-primary text-2xl my-2" onClick={() => speak(`sound_${letter.toLowerCase()}.mp3`)}>
         🔊 Play Sound Again
       </button>
-
       <div className="text-lg min-h-[2em] font-semibold">{feedback}</div>
-
       {!feedback && (
         <div className="flex gap-4 fade-in">
           {choices.map((c) => (
             <button key={c} className="btn text-3xl" style={{ background: "var(--card)", minWidth: 64 }}
-              onClick={() => { sfxTap(); pick(c); }}>
-              {c}
-            </button>
+              onClick={() => { sfxTap(); pick(c); }}>{c}</button>
           ))}
         </div>
       )}

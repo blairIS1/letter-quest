@@ -55,18 +55,13 @@ export default function MatchLetters({ onComplete }: { onComplete: () => void })
       <BookBuddy mood={mood} size={80} />
       <p className="opacity-70 text-center">Find the lowercase match!</p>
       <ProgressBar value={idx + 1} total={letters.length} />
-
       <div className="text-8xl font-bold my-2" style={{ color: "var(--accent)" }}>{letter}</div>
-
       <div className="text-lg min-h-[2em] font-semibold">{feedback}</div>
-
       {!feedback && (
         <div className="flex gap-4 fade-in">
           {choices.map((c) => (
             <button key={c} className="btn text-3xl" style={{ background: "var(--card)", minWidth: 64 }}
-              onClick={() => { sfxTap(); pick(c); }}>
-              {c}
-            </button>
+              onClick={() => { sfxTap(); pick(c); }}>{c}</button>
           ))}
         </div>
       )}

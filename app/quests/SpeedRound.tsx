@@ -8,7 +8,7 @@ import Confetti from "./Confetti";
 import ProgressBar from "./ProgressBar";
 
 const ROUNDS = 6;
-const TIME_LIMIT = 5000; // 5 seconds per letter
+const TIME_LIMIT = 5000;
 
 export default function SpeedRound({ onComplete }: { onComplete: () => void }) {
   const [letters] = useState(() => pickLetters(ROUNDS));
@@ -23,7 +23,6 @@ export default function SpeedRound({ onComplete }: { onComplete: () => void }) {
 
   useEffect(() => { speak("q4_start.mp3"); return () => { stopSpeaking(); clearInterval(timerRef.current); }; }, []);
 
-  // Timer per round
   useEffect(() => {
     if (done || feedback) return;
     setTimeLeft(100);
@@ -42,7 +41,6 @@ export default function SpeedRound({ onComplete }: { onComplete: () => void }) {
     return () => clearInterval(timerRef.current);
   }, [idx, done, feedback]);
 
-  // Play sound for current letter
   useEffect(() => {
     if (!done && !feedback) speak(`sound_${letters[idx].toLowerCase()}.mp3`);
   }, [idx, done, feedback, letters]);
@@ -62,6 +60,7 @@ export default function SpeedRound({ onComplete }: { onComplete: () => void }) {
   }
 
   const letter = letters[idx];
+  const phonic = PHONICS[letter];
   const choices = makeChoices(letter, 4);
   const timerColor = timeLeft > 50 ? "var(--success)" : timeLeft > 25 ? "var(--warn)" : "#ef4444";
 
@@ -70,11 +69,11 @@ export default function SpeedRound({ onComplete }: { onComplete: () => void }) {
     if (choice === letter) {
       sfxCorrect(); setMood("happy"); setShowConfetti(true);
       setScore((s) => s + 1);
-      setFeedback(`✅ ${PHONICS[letter].emoji} ${letter}!`);
+      setFeedback(`✅ ${phonic.emoji} ${letter}!`);
       setTimeout(() => { setFeedback(""); setMood("idle"); setShowConfetti(false); setIdx((i) => i + 1); }, 1000);
     } else {
       sfxWrong(); setMood("scared");
-      setFeedback(`It was ${letter}! ${PHONICS[letter].emoji}`);
+      setFeedback(`It was ${letter}! ${phonic.emoji}`);
       setTimeout(() => { setFeedback(""); setMood("idle"); setIdx((i) => i + 1); }, 1200);
     }
   };
@@ -85,28 +84,21 @@ export default function SpeedRound({ onComplete }: { onComplete: () => void }) {
       <h2 className="text-3xl font-bold">⚡ Quest 4: Speed Round!</h2>
       <BookBuddy mood={mood} size={80} />
       <ProgressBar value={idx + 1} total={letters.length} />
-
-      {/* Timer bar */}
       <div className="w-full max-w-xs">
         <div className="progress-track">
           <div className="progress-fill" style={{ width: `${timeLeft}%`, background: timerColor, transition: "width 0.05s linear" }} />
         </div>
       </div>
-
       <button className="btn text-xl my-2" style={{ background: "rgba(255,255,255,0.1)" }}
         onClick={() => speak(`sound_${letter.toLowerCase()}.mp3`)}>
         🔊 Hear Again
       </button>
-
       <div className="text-lg min-h-[2em] font-semibold">{feedback}</div>
-
       {!feedback && (
         <div className="flex gap-4 fade-in">
           {choices.map((c) => (
             <button key={c} className="btn text-3xl" style={{ background: "var(--card)", minWidth: 64 }}
-              onClick={() => { sfxTap(); pick(c); }}>
-              {c}
-            </button>
+              onClick={() => { sfxTap(); pick(c); }}>{c}</button>
           ))}
         </div>
       )}

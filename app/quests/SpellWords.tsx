@@ -1,24 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
+import { pickSpellWords } from "./data";
 import BookBuddy from "./BookBuddy";
 import { sfxCorrect, sfxWrong, sfxTap } from "./sfx";
 import { speak, stopSpeaking } from "./speak";
 import Confetti from "./Confetti";
 import ProgressBar from "./ProgressBar";
 
-const WORDS = [
-  { word: "CAT", emoji: "🐱" },
-  { word: "DOG", emoji: "🐕" },
-  { word: "SUN", emoji: "☀️" },
-  { word: "BIG", emoji: "🐘" },
-  { word: "RED", emoji: "🔴" },
-  { word: "HAT", emoji: "🎩" },
-];
-
 export default function SpellWords({ onComplete }: { onComplete: () => void }) {
-  const [words] = useState(() => [...WORDS].sort(() => Math.random() - 0.5).slice(0, 4));
+  const [words] = useState(() => [...pickSpellWords(4, 3), ...pickSpellWords(2, 4)]);
   const [wIdx, setWIdx] = useState(0);
-  const [pos, setPos] = useState(0); // current letter position in word
+  const [pos, setPos] = useState(0);
   const [feedback, setFeedback] = useState("");
   const [mood, setMood] = useState<"idle" | "happy" | "scared">("idle");
   const [showConfetti, setShowConfetti] = useState(false);
@@ -40,7 +32,6 @@ export default function SpellWords({ onComplete }: { onComplete: () => void }) {
   const current = words[wIdx];
   const letters = current.word.split("");
   const target = letters[pos];
-  // Scrambled choices: remaining letters + some distractors
   const distractors = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").filter((l) => !letters.includes(l)).sort(() => Math.random() - 0.5).slice(0, 3);
   const remaining = letters.slice(pos);
   const choices = [...new Set([...remaining, ...distractors])].sort(() => Math.random() - 0.5).slice(0, 6);
@@ -74,7 +65,6 @@ export default function SpellWords({ onComplete }: { onComplete: () => void }) {
 
       <div className="text-5xl my-2">{current.emoji}</div>
 
-      {/* Word progress: filled letters + blanks */}
       <div className="flex gap-2">
         {letters.map((l, i) => (
           <div key={i} className="text-3xl font-bold w-12 h-12 flex items-center justify-center rounded-lg"

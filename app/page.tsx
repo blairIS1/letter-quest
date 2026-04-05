@@ -45,8 +45,7 @@ export default function Home() {
               <p className="opacity-60">Not too close — your eyes will thank you! 👀</p>
             </div>
             <button className="btn btn-primary text-xl mt-4" onClick={() => {
-              sfxTap(); setStarted(true);
-              speak("welcome.mp3");
+              sfxTap(); setStarted(true); speak("welcome.mp3");
             }}>▶️ Start!</button>
           </>
         ) : (
