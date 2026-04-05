@@ -1,0 +1,11 @@
+[
+  { "word": "CAR", "emoji": "🚗" }, { "word": "BUS", "emoji": "🚌" }, { "word": "VAN", "emoji": "🚐" },
+  { "word": "CAB", "emoji": "🚕" }, { "word": "GAS", "emoji": "⛽" }, { "word": "MAP", "emoji": "🗺️" },
+  { "word": "TIRE", "emoji": "🛞" }, { "word": "ROAD", "emoji": "🛣️" }, { "word": "STOP", "emoji": "🛑" },
+  { "word": "HORN", "emoji": "📯" }, { "word": "BIKE", "emoji": "🚲" }, { "word": "JEEP", "emoji": "🚙" },
+  { "word": "FUEL", "emoji": "⛽" }, { "word": "LAMP", "emoji": "💡" }, { "word": "SEAT", "emoji": "💺" },
+  { "word": "GEAR", "emoji": "⚙️" }, { "word": "TRUCK", "emoji": "🚛" }, { "word": "TRAIN", "emoji": "🚂" },
+  { "word": "WHEEL", "emoji": "🛞" }, { "word": "MOTOR", "emoji": "⚙️" }, { "word": "SPEED", "emoji": "💨" },
+  { "word": "BRAKE", "emoji": "🛑" }, { "word": "LIGHT", "emoji": "🚦" }, { "word": "RACER", "emoji": "🏎️" },
+  { "word": "DRIVE", "emoji": "🚗" }
+]

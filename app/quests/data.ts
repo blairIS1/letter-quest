@@ -41,6 +41,8 @@ export const WORD_PACKS = [
   { id: "food", name: "🍎 Food", emoji: "🍎" },
   { id: "things", name: "🔧 Things", emoji: "🔧" },
   { id: "nature", name: "🌍 Nature", emoji: "🌍" },
+  { id: "cars", name: "🚗 Cars", emoji: "🚗" },
+  { id: "rockets", name: "🚀 Rockets", emoji: "🚀" },
 ];
 
 // Detect basePath for loading JSON
