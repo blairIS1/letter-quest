@@ -1,0 +1,11 @@
+[
+  { "word": "CAR", "emoji": "🚗" }, { "word": "BUS", "emoji": "🚌" }, { "word": "VAN", "emoji": "🚐" },
+  { "word": "BOAT", "emoji": "⛵" }, { "word": "SHIP", "emoji": "🚢" }, { "word": "BIKE", "emoji": "🚲" },
+  { "word": "KITE", "emoji": "🪁" }, { "word": "DRUM", "emoji": "🥁" }, { "word": "BELL", "emoji": "🔔" },
+  { "word": "LAMP", "emoji": "💡" }, { "word": "SOCK", "emoji": "🧦" }, { "word": "DOOR", "emoji": "🚪" },
+  { "word": "RING", "emoji": "💍" }, { "word": "BONE", "emoji": "🦴" }, { "word": "BALL", "emoji": "⚽" },
+  { "word": "BOOK", "emoji": "📖" }, { "word": "TRAIN", "emoji": "🚂" }, { "word": "TRUCK", "emoji": "🚛" },
+  { "word": "CHAIR", "emoji": "🪑" }, { "word": "CLOCK", "emoji": "🕐" }, { "word": "CROWN", "emoji": "👑" },
+  { "word": "PIANO", "emoji": "🎹" }, { "word": "ROBOT", "emoji": "🤖" }, { "word": "HOUSE", "emoji": "🏠" },
+  { "word": "KNIFE", "emoji": "🔪" }
+]

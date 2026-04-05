@@ -1,0 +1,11 @@
+[
+  { "word": "SUN", "emoji": "☀️" }, { "word": "MAP", "emoji": "🗺️" }, { "word": "KEY", "emoji": "🔑" },
+  { "word": "NET", "emoji": "🥅" }, { "word": "BOX", "emoji": "📦" }, { "word": "BED", "emoji": "🛏️" },
+  { "word": "HAT", "emoji": "🎩" }, { "word": "PEN", "emoji": "🖊️" }, { "word": "LEG", "emoji": "🦵" },
+  { "word": "FAN", "emoji": "🪭" }, { "word": "STAR", "emoji": "⭐" }, { "word": "MOON", "emoji": "🌙" },
+  { "word": "LEAF", "emoji": "🍃" }, { "word": "RAIN", "emoji": "🌧️" }, { "word": "SNOW", "emoji": "❄️" },
+  { "word": "ROSE", "emoji": "🌹" }, { "word": "TREE", "emoji": "🌳" }, { "word": "KING", "emoji": "🤴" },
+  { "word": "CLOUD", "emoji": "☁️" }, { "word": "EARTH", "emoji": "🌍" }, { "word": "FLAME", "emoji": "🔥" },
+  { "word": "HEART", "emoji": "❤️" }, { "word": "OCEAN", "emoji": "🌊" }, { "word": "LIGHT", "emoji": "💡" },
+  { "word": "STONE", "emoji": "🪨" }
+]

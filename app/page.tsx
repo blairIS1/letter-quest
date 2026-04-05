@@ -9,17 +9,18 @@ import Confetti from "./quests/Confetti";
 import SessionTimer, { useSessionTimer } from "./quests/SessionTimer";
 import { sfxTap, sfxCelebrate } from "./quests/sfx";
 import { speak, stopSpeaking } from "./quests/speak";
-import { TrainingData } from "./quests/data";
+import { TrainingData, WORD_PACKS, WordEntry, loadWordPack } from "./quests/data";
 import { recordCompletion, getCompletions, BOOK_COLORS, getSelectedColor, setSelectedColor } from "./quests/scores";
 
 const QUESTS = ["🔤 Match Letters", "🔊 Letter Sounds", "✏️ Spell Words", "⚡ Speed Round"];
 
-type Phase = "menu" | "q1" | "q2" | "q3" | "q4";
+type Phase = "menu" | "pick-pack" | "q1" | "q2" | "q3" | "q4";
 
 export default function Home() {
   const [phase, setPhase] = useState<Phase>("menu");
   const [completed, setCompleted] = useState([false, false, false, false]);
   const [training, setTraining] = useState<TrainingData>({});
+  const [words, setWords] = useState<WordEntry[]>([]);
   const [completions, setCompletions] = useState(0);
   const [bookColor, setBookColor] = useState("#38bdf8");
   const [started, setStarted] = useState(false);
@@ -114,9 +115,30 @@ export default function Home() {
 
   return (
     <>
+      {phase === "pick-pack" && (
+        <div className="flex flex-col items-center justify-center min-h-screen gap-6 p-8 fade-in">
+          <BookBuddy mood="happy" size={100} color={bookColor} />
+          <h2 className="text-3xl font-bold">📦 Pick a Word Pack!</h2>
+          <p className="opacity-70 text-center">Which words do you want to spell?</p>
+          <div className="flex flex-col gap-3 w-full max-w-sm">
+            {WORD_PACKS.map((pack) => (
+              <button key={pack.id} className="btn btn-primary text-xl flex items-center gap-3"
+                onClick={async () => {
+                  sfxTap();
+                  const loaded = await loadWordPack(pack.id);
+                  setWords(loaded);
+                  setPhase("q3");
+                }}>
+                <span className="text-2xl">{pack.emoji}</span>
+                <span>{pack.name}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       {phase === "q1" && <MatchLetters onComplete={() => { markDone(0); setPhase("q2"); }} />}
-      {phase === "q2" && <LetterSounds onComplete={(data) => { setTraining(data); markDone(1); setPhase("q3"); }} />}
-      {phase === "q3" && <SpellWords onComplete={() => { markDone(2); setPhase("q4"); }} />}
+      {phase === "q2" && <LetterSounds onComplete={(data) => { setTraining(data); markDone(1); setPhase("pick-pack"); }} />}
+      {phase === "q3" && words.length > 0 && <SpellWords words={words} onComplete={() => { markDone(2); setPhase("q4"); }} />}
       {phase === "q4" && <SpeedRound onComplete={() => { markDone(3); setCompletions(recordCompletion()); sfxCelebrate(); setPhase("menu"); speak("all_done.mp3"); }} />}
     </>
   );

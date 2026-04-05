@@ -1,0 +1,11 @@
+[
+  { "word": "CAT", "emoji": "🐱" }, { "word": "DOG", "emoji": "🐕" }, { "word": "PIG", "emoji": "🐷" },
+  { "word": "COW", "emoji": "🐄" }, { "word": "BEE", "emoji": "🐝" }, { "word": "BAT", "emoji": "🦇" },
+  { "word": "FOX", "emoji": "🦊" }, { "word": "HEN", "emoji": "🐔" }, { "word": "ANT", "emoji": "🐜" },
+  { "word": "OWL", "emoji": "🦉" }, { "word": "FISH", "emoji": "🐟" }, { "word": "BIRD", "emoji": "🐦" },
+  { "word": "FROG", "emoji": "🐸" }, { "word": "BEAR", "emoji": "🐻" }, { "word": "DUCK", "emoji": "🦆" },
+  { "word": "LION", "emoji": "🦁" }, { "word": "WOLF", "emoji": "🐺" }, { "word": "CRAB", "emoji": "🦀" },
+  { "word": "MOUSE", "emoji": "🐭" }, { "word": "HORSE", "emoji": "🐴" }, { "word": "WHALE", "emoji": "🐋" },
+  { "word": "SNAKE", "emoji": "🐍" }, { "word": "SHARK", "emoji": "🦈" }, { "word": "TIGER", "emoji": "🐯" },
+  { "word": "ZEBRA", "emoji": "🦓" }, { "word": "PANDA", "emoji": "🐼" }
+]

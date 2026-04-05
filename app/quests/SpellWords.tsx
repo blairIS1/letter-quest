@@ -1,20 +1,20 @@
 "use client";
 import { useState, useEffect } from "react";
-import { pickSpellWords } from "./data";
+import { pickSpellWords, WordEntry } from "./data";
 import BookBuddy from "./BookBuddy";
 import { sfxCorrect, sfxWrong, sfxTap } from "./sfx";
 import { speak, stopSpeaking } from "./speak";
 import Confetti from "./Confetti";
 import ProgressBar from "./ProgressBar";
 
-export default function SpellWords({ onComplete }: { onComplete: () => void }) {
-  const [words] = useState(() => [...pickSpellWords(4, 3), ...pickSpellWords(2, 4)]);
+export default function SpellWords({ words, onComplete }: { words: WordEntry[]; onComplete: () => void }) {
+  const [picked] = useState(() => [...pickSpellWords(words, 4, 3), ...pickSpellWords(words, 2, 4)]);
   const [wIdx, setWIdx] = useState(0);
   const [pos, setPos] = useState(0);
   const [feedback, setFeedback] = useState("");
   const [mood, setMood] = useState<"idle" | "happy" | "scared">("idle");
   const [showConfetti, setShowConfetti] = useState(false);
-  const done = wIdx >= words.length;
+  const done = wIdx >= picked.length;
 
   useEffect(() => { speak("q3_start.mp3"); return () => stopSpeaking(); }, []);
 
@@ -29,7 +29,7 @@ export default function SpellWords({ onComplete }: { onComplete: () => void }) {
     );
   }
 
-  const current = words[wIdx];
+  const current = picked[wIdx];
   const letters = current.word.split("");
   const target = letters[pos];
   const distractors = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").filter((l) => !letters.includes(l)).sort(() => Math.random() - 0.5).slice(0, 3);
@@ -61,7 +61,7 @@ export default function SpellWords({ onComplete }: { onComplete: () => void }) {
       <Confetti active={showConfetti} />
       <h2 className="text-3xl font-bold">✏️ Quest 3: Spell It!</h2>
       <BookBuddy mood={mood} size={80} />
-      <ProgressBar value={wIdx + 1} total={words.length} />
+      <ProgressBar value={wIdx + 1} total={picked.length} />
 
       <div className="text-5xl my-2">{current.emoji}</div>
 
