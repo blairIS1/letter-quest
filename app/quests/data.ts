@@ -33,47 +33,41 @@ export const PHONICS: Record<string, { sound: string; word: string; emoji: strin
   Z: { sound: "zzz", word: "Zebra", emoji: "🦓" },
 };
 
-// 100 common sight words for spelling, grouped by length
-// Short words (3 letters) are easiest, longer words unlock with practice
+// 100 common words for spelling — only concrete words where emoji clearly matches
 export const SPELL_WORDS = [
-  // 3-letter words (40)
-  { word: "THE", emoji: "👉" }, { word: "AND", emoji: "🤝" }, { word: "CAT", emoji: "🐱" },
-  { word: "DOG", emoji: "🐕" }, { word: "SUN", emoji: "☀️" }, { word: "BIG", emoji: "🐘" },
-  { word: "RED", emoji: "🔴" }, { word: "HAT", emoji: "🎩" }, { word: "RUN", emoji: "🏃" },
-  { word: "CAN", emoji: "🥫" }, { word: "MAN", emoji: "👨" }, { word: "HAS", emoji: "✋" },
-  { word: "HIS", emoji: "👦" }, { word: "HER", emoji: "👧" }, { word: "NOT", emoji: "🚫" },
-  { word: "BUT", emoji: "👆" }, { word: "YOU", emoji: "🫵" }, { word: "ALL", emoji: "🌍" },
-  { word: "ARE", emoji: "👥" }, { word: "WAS", emoji: "⏪" }, { word: "ONE", emoji: "1️⃣" },
-  { word: "TWO", emoji: "2️⃣" }, { word: "FOR", emoji: "🎁" }, { word: "GOT", emoji: "🎯" },
-  { word: "LET", emoji: "👐" }, { word: "SAY", emoji: "💬" }, { word: "SHE", emoji: "👩" },
-  { word: "HIM", emoji: "👦" }, { word: "HOW", emoji: "❓" }, { word: "DID", emoji: "✅" },
-  { word: "GET", emoji: "🤲" }, { word: "OLD", emoji: "👴" }, { word: "NEW", emoji: "✨" },
-  { word: "NOW", emoji: "⏰" }, { word: "DAY", emoji: "🌅" }, { word: "WAY", emoji: "🛤️" },
-  { word: "MAY", emoji: "🌸" }, { word: "BOX", emoji: "📦" }, { word: "FUN", emoji: "🎉" },
-  { word: "BUS", emoji: "🚌" },
-  // 4-letter words (35)
-  { word: "THAT", emoji: "👈" }, { word: "WITH", emoji: "🤝" }, { word: "HAVE", emoji: "🙌" },
-  { word: "THIS", emoji: "👇" }, { word: "WILL", emoji: "💪" }, { word: "YOUR", emoji: "🫵" },
-  { word: "FROM", emoji: "📤" }, { word: "THEY", emoji: "👥" }, { word: "BEEN", emoji: "✅" },
-  { word: "SAID", emoji: "💬" }, { word: "EACH", emoji: "☝️" }, { word: "MAKE", emoji: "🔨" },
-  { word: "LIKE", emoji: "❤️" }, { word: "LONG", emoji: "📏" }, { word: "LOOK", emoji: "👀" },
-  { word: "MANY", emoji: "🔢" }, { word: "SOME", emoji: "🤏" }, { word: "THEM", emoji: "👥" },
-  { word: "THAN", emoji: "⚖️" }, { word: "COME", emoji: "🏠" }, { word: "MADE", emoji: "🏗️" },
-  { word: "FIND", emoji: "🔍" }, { word: "BACK", emoji: "🔙" }, { word: "ONLY", emoji: "☝️" },
-  { word: "JUST", emoji: "👌" }, { word: "OVER", emoji: "🌈" }, { word: "GOOD", emoji: "👍" },
-  { word: "KNOW", emoji: "🧠" }, { word: "TAKE", emoji: "🤲" }, { word: "TREE", emoji: "🌳" },
+  // 3-letter words
+  { word: "CAT", emoji: "🐱" }, { word: "DOG", emoji: "🐕" }, { word: "SUN", emoji: "☀️" },
+  { word: "HAT", emoji: "🎩" }, { word: "BUS", emoji: "🚌" }, { word: "CUP", emoji: "🥤" },
+  { word: "BED", emoji: "🛏️" }, { word: "PIG", emoji: "🐷" }, { word: "EGG", emoji: "🥚" },
+  { word: "COW", emoji: "🐄" }, { word: "BEE", emoji: "🐝" }, { word: "BAT", emoji: "🦇" },
+  { word: "FAN", emoji: "🪭" }, { word: "JAM", emoji: "🫙" }, { word: "MAP", emoji: "🗺️" },
+  { word: "PEN", emoji: "🖊️" }, { word: "BOX", emoji: "📦" }, { word: "FOX", emoji: "🦊" },
+  { word: "HEN", emoji: "🐔" }, { word: "ANT", emoji: "🐜" }, { word: "OWL", emoji: "🦉" },
+  { word: "PIE", emoji: "🥧" }, { word: "KEY", emoji: "🔑" }, { word: "CAR", emoji: "🚗" },
+  { word: "JAR", emoji: "🫙" }, { word: "LEG", emoji: "🦵" }, { word: "NET", emoji: "🥅" },
+  { word: "MOP", emoji: "🧹" }, { word: "RUG", emoji: "🟫" }, { word: "VAN", emoji: "🚐" },
+  // 4-letter words
   { word: "FISH", emoji: "🐟" }, { word: "BIRD", emoji: "🐦" }, { word: "BOOK", emoji: "📖" },
-  { word: "PLAY", emoji: "🎮" }, { word: "FOOD", emoji: "🍕" },
-  // 5-letter words (25)
-  { word: "ABOUT", emoji: "💭" }, { word: "THEIR", emoji: "👥" }, { word: "WHICH", emoji: "🤔" },
-  { word: "WOULD", emoji: "💭" }, { word: "THERE", emoji: "👉" }, { word: "THESE", emoji: "👇" },
-  { word: "OTHER", emoji: "↔️" }, { word: "COULD", emoji: "💪" }, { word: "AFTER", emoji: "⏩" },
-  { word: "FIRST", emoji: "🥇" }, { word: "WATER", emoji: "💧" }, { word: "HOUSE", emoji: "🏠" },
-  { word: "GREAT", emoji: "⭐" }, { word: "AGAIN", emoji: "🔄" }, { word: "UNDER", emoji: "⬇️" },
-  { word: "NEVER", emoji: "🚫" }, { word: "EVERY", emoji: "📅" }, { word: "EARTH", emoji: "🌍" },
-  { word: "LIGHT", emoji: "💡" }, { word: "NIGHT", emoji: "🌙" }, { word: "HAPPY", emoji: "😊" },
-  { word: "TRAIN", emoji: "🚂" }, { word: "SMILE", emoji: "😄" }, { word: "MOUSE", emoji: "🐭" },
-  { word: "APPLE", emoji: "🍎" },
+  { word: "TREE", emoji: "🌳" }, { word: "CAKE", emoji: "🎂" }, { word: "FROG", emoji: "🐸" },
+  { word: "STAR", emoji: "⭐" }, { word: "MOON", emoji: "🌙" }, { word: "BEAR", emoji: "🐻" },
+  { word: "DUCK", emoji: "🦆" }, { word: "LION", emoji: "🦁" }, { word: "BOAT", emoji: "⛵" },
+  { word: "BELL", emoji: "🔔" }, { word: "DRUM", emoji: "🥁" }, { word: "LAMP", emoji: "💡" },
+  { word: "SOCK", emoji: "🧦" }, { word: "CORN", emoji: "🌽" }, { word: "DOOR", emoji: "🚪" },
+  { word: "KING", emoji: "🤴" }, { word: "RING", emoji: "💍" }, { word: "BONE", emoji: "🦴" },
+  { word: "LEAF", emoji: "🍃" }, { word: "RAIN", emoji: "🌧️" }, { word: "SNOW", emoji: "❄️" },
+  { word: "WOLF", emoji: "🐺" }, { word: "CRAB", emoji: "🦀" }, { word: "SHIP", emoji: "🚢" },
+  { word: "BIKE", emoji: "🚲" }, { word: "KITE", emoji: "🪁" }, { word: "ROSE", emoji: "🌹" },
+  // 5-letter words
+  { word: "APPLE", emoji: "🍎" }, { word: "HOUSE", emoji: "🏠" }, { word: "TRAIN", emoji: "🚂" },
+  { word: "MOUSE", emoji: "🐭" }, { word: "HORSE", emoji: "🐴" }, { word: "WHALE", emoji: "🐋" },
+  { word: "SNAKE", emoji: "🐍" }, { word: "GRAPE", emoji: "🍇" }, { word: "LEMON", emoji: "🍋" },
+  { word: "BREAD", emoji: "🍞" }, { word: "CHAIR", emoji: "🪑" }, { word: "CLOCK", emoji: "🕐" },
+  { word: "CLOUD", emoji: "☁️" }, { word: "CROWN", emoji: "👑" }, { word: "EARTH", emoji: "🌍" },
+  { word: "FLAME", emoji: "🔥" }, { word: "HEART", emoji: "❤️" }, { word: "KNIFE", emoji: "🔪" },
+  { word: "OCEAN", emoji: "🌊" }, { word: "PIANO", emoji: "🎹" }, { word: "PIZZA", emoji: "🍕" },
+  { word: "ROBOT", emoji: "🤖" }, { word: "SHARK", emoji: "🦈" }, { word: "TIGER", emoji: "🐯" },
+  { word: "TRUCK", emoji: "🚛" }, { word: "ZEBRA", emoji: "🦓" }, { word: "CANDY", emoji: "🍬" },
+  { word: "PANDA", emoji: "🐼" }, { word: "MELON", emoji: "🍈" }, { word: "PEACH", emoji: "🍑" },
 ];
 
 // Pick words for a spelling round, starting with short words
